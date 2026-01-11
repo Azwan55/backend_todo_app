@@ -1,13 +1,12 @@
-package com.example.Backend_todo_list;
+package com.example.Backend_todo_list.auth;
 
-import com.example.Backend_todo_list.jwt.JwtFilter;
+import com.example.Backend_todo_list.auth.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,12 +43,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/test", "/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/auth/login").permitAll()  // only login is public
+                        .anyRequest().authenticated()                   // everything else requires JWT
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //make jwt filter run before login
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+        // create the filter chain
         return http.build();
     }
 }

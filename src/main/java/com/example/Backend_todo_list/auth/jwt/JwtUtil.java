@@ -1,14 +1,12 @@
-package com.example.Backend_todo_list.jwt;
+package com.example.Backend_todo_list.auth.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.security.Key;
 import java.util.Date;
 
@@ -16,7 +14,7 @@ import java.util.Date;
 public class JwtUtil {
 
     @Value("${jwt.secret}")
-    private String jwtSecret; // Base64-encoded 256-bit key
+    private String jwtSecret;
 
     private Key getSigningKey() {
         // Decode Base64 string back to bytes

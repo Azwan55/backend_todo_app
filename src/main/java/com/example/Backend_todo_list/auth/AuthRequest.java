@@ -1,4 +1,4 @@
-package com.example.Backend_todo_list;
+package com.example.Backend_todo_list.auth;
 
 public class AuthRequest {
 

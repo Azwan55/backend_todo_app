@@ -1,4 +1,4 @@
-package com.example.Backend_todo_list.user;
+package com.example.Backend_todo_list.repositories;
 
 import com.example.Backend_todo_list.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
